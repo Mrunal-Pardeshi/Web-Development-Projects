@@ -10,8 +10,9 @@
 
 <body class=" bg-black text-white">
     <div class="flex container mx-auto">
+
         <div class="first w-[70%]">
-            <div class="logo invert my-4">
+            <div class="logo invert my-4 flex items-center justify-center">
 
                 <svg viewBox="0 0 24 24" aria-hidden="true"
                     class=" w-8 r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-1nao33i r-16y2uox r-8kz0gk">
@@ -24,49 +25,52 @@
 
             </div>
 
-            <div class="sidebar flex flex-end">
+            <div class="sidebar flex items-center flex-col">
                 <ul class="flex flex-col text-lg space-y-1.5 px-11 font-bold">
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/home.svg" alt="">Home
+                        <img class="w-10" src="./img/home.svg" alt=""><span class="hidden md:block">Home</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/explore.svg" alt="">Explore
+                        <img class="w-10" src="./img/explore.svg" alt=""><span class="hidden md:block">Explore</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/notifications.svg" alt="">Notifications
+                        <img class="w-10" src="./img/notifications.svg" alt=""><span class="hidden md:block">Notifications</span>
                     <li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/messages.svg" alt="">Messages
+                        <img class="w-10" src="./img/messages.svg" alt=""><span class="hidden md:block">Messages</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/grok.svg" alt="">Grok
+                        <img class="w-10" src="./img/grok.svg" alt=""><span class="hidden md:block">Grok</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/communities.svg" alt="">Communities
+                        <img class="w-10" src="./img/communities.svg" alt=""><span class="hidden md:block">Communities</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/premium.svg" alt="">Premium
+                        <img class="w-10" src="./img/premium.svg" alt=""><span class="hidden md:block">Premium</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/verified.svg" alt="">Verified Orgs
+                        <img class="w-10" src="./img/verified.svg" alt=""><span class="hidden md:block">Verified Orgs</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/profile.svg" alt="">Profile
+                        <img class="w-10" src="./img/profile.svg" alt=""><span class="hidden md:block">Profile</span>
                     </li>
                     <li
                         class="flex justify-start items-center gap-3 w-fit px-5 py-1.5 hover:bg-[#292929] hover:rounded-full hover:cursor-pointer">
-                        <img class="w-10" src="./img/more.svg" alt="">More
+                        <img class="w-10" src="./img/more.svg" alt=""><span class="hidden md:block">More</span>
                     </li>
                 </ul>
+                <div class="button">
+                    <button class="bg-white px-[100px] py-3 rounded-full text-black text-xl font-bold hover:cursor-pointer">Post</button>
+                </div>
             </div>
         </div>
 
@@ -111,10 +115,44 @@
                 </div>
 
             </div>
-            <hr>
+
+            <div class="h-[0.2px] bg-gray-600 my-3"></div>
+
+            <div class="posts">
+                <div class="post">
+                    <div class="flex">
+                        <div class="image">
+                            <img class="w-[40px] rounded-full m-2" src="./img/profile.jpg" alt="">
+                        </div>
+                        
+                        <div class="content mx-7">
+                            <span class="font-bold hover:underline cursor-pointer my-2"> Narendra Modi</span> <span class="text-gray-700"> @narendramodi · Apr 12 </span>
+                            <div class="">देशवासियों को हनुमान जयंती की ढेरों शुभकामनाएं। संकटमोचन की कृपा से आप सभी का जीवन सदैव स्वस्थ, सुखी और संपन्न रहे, यही कामना है।</div>
+                            <div class="postimg m-4 ml-0">
+                                <img class="rounded-2xl border-[0.5px] border-gray-700" src="https://pbs.twimg.com/media/GoTf91xWAAAU7PH?format=jpg&name=small" alt="">
+                            </div>
+                            <div class="icons flex mx-2">
+                                <div class="icon flex items-center gap-10 text-gray-700">
+                                    <span class="flex"><img class="" src="./img/comments.svg" alt="">1k</span>
+                                    <span class="flex"><img class="" src="./img/repost.svg" alt="">14k</span>
+                                    <span class="flex"><img class="" src="./img/likes.svg" alt="">110k</span>
+                                    <span class="flex"><img class="" src="./img/views.svg" alt="">3.4M</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    
+                </div>
+            </div>
+            
+            <div class=" h-[0.2px] bg-gray-600 my-3"></div>
+
+            
+            
         </div>
 
-        <div class="third w-full space-y-1">
+        <div class="third w-full space-y-3">
 
             <div class="search">
                 <input type="text"
@@ -122,7 +160,7 @@
                     placeholder="Search">
             </div>
 
-            <div class="whatsHappening mx-4 py-5 w-1/2 border-[1px] border-white rounded-3xl space-y-3 overflow-y-scroll max-h-[60%]">
+            <div class="whatsHappening mx-4 py-5 w-1/2 border-[1px] border-white rounded-3xl space-y-3">
                 <h1 class="text-xl font-bold px-3">What's Happening</h1>
 
                 <div class="items p-3 hover:bg-[#1a1818] hover:cursor-pointer">
@@ -143,34 +181,28 @@
                     <div class="text-xs text-gray-200">40.2k Posts</div>
                 </div>
 
-                <div class="items p-3 hover:bg-[#1a1818] hover:cursor-pointer">
-                    <div class="text-xs text-gray-200">Trending in India</div>
-                    <div class="font-bold text-lg">#Hurry</div>
-                    <div class="text-xs text-gray-200">40.2k Posts</div>
-                </div>
+            </div>
+
+            <div class="whotofollow mx-4 py-5 w-1/2 border-[1px] border-white rounded-3xl space-y-1">
+                <h1 class="text-2xl font-bold px-3">Who to Follow</h1>
 
                 <div class="items p-3 hover:bg-[#1a1818] hover:cursor-pointer">
-                    <div class="text-xs text-gray-200">Trending in India</div>
-                    <div class="font-bold text-lg">#Aurry</div>
-                    <div class="text-xs text-gray-200">40.2k Posts</div>
+                    <div class="font-semibold text-lg">Akshay Kumar</div>
                 </div>
-
                 <div class="items p-3 hover:bg-[#1a1818] hover:cursor-pointer">
-                    <div class="text-xs text-gray-200">Trending in India</div>
-                    <div class="font-bold text-lg">#Curry</div>
-                    <div class="text-xs text-gray-200">40.2k Posts</div>
+                    <div class="font-semibold text-lg">Shreya Ghoshal</div>
+                    
                 </div>
-
                 <div class="items p-3 hover:bg-[#1a1818] hover:cursor-pointer">
-                    <div class="text-xs text-gray-200">Trending in India</div>
-                    <div class="font-bold text-lg">#Furry</div>
-                    <div class="text-xs text-gray-200">40.2k Posts</div>
+                    <div class="font-semibold text-lg">Sonu Nigam</div>
                 </div>
+               
 
-
+                </div>
 
             </div>
         </div>
+
     </div>
 </body>
 
