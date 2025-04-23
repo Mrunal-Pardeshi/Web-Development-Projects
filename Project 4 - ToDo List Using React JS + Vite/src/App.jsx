@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 import { v4 as uuidv4 } from 'uuid';
  
 
@@ -79,7 +81,7 @@ function App() {
           <input onChange={handleChange} value={todo} className='bg-white w-full rounded-lg px-5 py-1' type="text" />
           <button onClick={handleAdd} disabled={todo.length<=3} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold disabled:bg-violet-800 rounded-md text-white cursor-pointer'>Save</button>
         </div>
-          <input type="checkbox" onChange={toggleFinished} checked={showfinished} /> Show Finished
+          <input className='my-4' type="checkbox" onChange={toggleFinished} checked={showfinished} /> Show Finished
         <h2 className='text-lg font-bold'>Your ToDos</h2>
 
         <div className="ToDos">
@@ -91,8 +93,8 @@ function App() {
               <div className={item.isCompleted?"line-through":""}>{item.todo}</div>
               </div>
               <div className="buttons">
-                <button onClick={(e)=>handleEdit(e, item.id)} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Edit</button>
-                <button onClick={(e)=>{handleDelete(e, item.id)}} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Delete</button>
+                <button onClick={(e)=>handleEdit(e, item.id)} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'><FaEdit /></button>
+                <button onClick={(e)=>{handleDelete(e, item.id)}} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'><MdDeleteForever /></button>
               </div>
             </div>
             })}
