@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar'
+import { v4 as uuidv4 } from 'uuid';
+ 
 
 function App() {
 
@@ -11,7 +13,7 @@ function App() {
   }
 
   const handleAdd = () => {
-    setTodos([...todos, { todo, isCompleted: false }])
+    setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }])
     setTodo("")
     console.log(todos)
   }
@@ -20,9 +22,23 @@ function App() {
 
   }
 
-  const handleDelete = () => {
-
+  const handleDelete = (e, id) => {
+    let newTodos = todos.filter(item=>{
+      return item.id !== id
+    });
+    setTodos(newTodos)
   }
+
+  const handleCheckbox = (e) => {
+    let id = e.target.name;
+    let index = todos.findIndex(item=>{
+      return item.id === id;
+    })
+    let newTodos = [...todos];
+    newTodos[index].isCompleted = !newTodos[index].isCompleted
+    setTodos(newTodos);
+  }
+  
 
   return (
     <>
@@ -39,12 +55,12 @@ function App() {
 
         <div className="ToDos">
           {todos.map(item=>{
-             return <div key={todo} className="ToDo flex w-1/2 my-3.5 justify-between">
-              <input type="checkbox" value={todo.isCompleted} name="" id="" />
+             return <div key={item.id} className="ToDo flex w-1/2 my-3.5 justify-between">
+              <input onChange={handleCheckbox} type="checkbox" value={item.isCompleted} name={item.id} id="" />
               <div className={item.iscompleted?"line-through":""}>{item.todo}</div>
               <div className="buttons">
                 <button onClick={handleEdit} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Edit</button>
-                <button onClick={handleDelete} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Delete</button>
+                <button onClick={(e)=>{handleDelete(e, item.id)}} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Delete</button>
               </div>
             </div>
             })}
