@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import { v4 as uuidv4 } from 'uuid';
  
@@ -7,6 +7,26 @@ function App() {
 
   const [todo, setTodo] = useState("")
   const [todos, setTodos] = useState([])
+  const [showfinished, setShowFinished] = useState(true)
+
+  const saveToLocal = () => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+
+  }
+
+  const toggleFinished = (params) => {
+    setShowFinished(!showfinished)
+  }
+  
+  
+  useEffect(() => {
+    let toDoString = localStorage.getItem("todos")
+    if(toDoString){
+      let todos = JSON.parse(localStorage.getItem("todos"))
+      setTodos(todos)
+    }
+  }, [])
+  
 
   const handleChange = (e) => {
     setTodo(e.target.value)
@@ -15,11 +35,18 @@ function App() {
   const handleAdd = () => {
     setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }])
     setTodo("")
-    console.log(todos)
+    saveToLocal()
   }
 
-  const handleEdit = () => {
-
+  const handleEdit = (e, id) => {
+    let t = todos.filter(i=>i.id===id)
+    setTodo(t[0].todo)
+    let newTodos = todos.filter(item=>{
+      return item.id !== id
+    });
+    setTodos(newTodos)
+    saveToLocal()
+    
   }
 
   const handleDelete = (e, id) => {
@@ -27,6 +54,7 @@ function App() {
       return item.id !== id
     });
     setTodos(newTodos)
+    saveToLocal()
   }
 
   const handleCheckbox = (e) => {
@@ -37,29 +65,33 @@ function App() {
     let newTodos = [...todos];
     newTodos[index].isCompleted = !newTodos[index].isCompleted
     setTodos(newTodos);
+    saveToLocal()
   }
   
 
   return (
     <>
       <Navbar></Navbar>
-      <div className="container mx-auto p-5 my-5 rounded-xl w-[90vw] bg-violet-300 min-h-[85vh]">
-
-        <div className="addToDo my-5">
+      <div className="container mx-auto p-5 my-5 rounded-xl bg-violet-300 min-h-[85vh] w-1/2">
+        <h1 className='font-bold text-center text-2xl'>MyTask - Manage all your ToDos at one place</h1>
+        <div className="addToDo flex flex-col gap-5 my-5">
           <h2 className='text-lg font-bold'>Add ToDo</h2>
-          <input onChange={handleChange} value={todo} className='bg-white w-1/2' type="text" />
-          <button onClick={handleAdd} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-3 rounded-md text-white cursor-pointer'>Add</button>
+          <input onChange={handleChange} value={todo} className='bg-white w-full rounded-lg px-5 py-1' type="text" />
+          <button onClick={handleAdd} disabled={todo.length<=3} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold disabled:bg-violet-800 rounded-md text-white cursor-pointer'>Save</button>
         </div>
-
+          <input type="checkbox" onChange={toggleFinished} checked={showfinished} /> Show Finished
         <h2 className='text-lg font-bold'>Your ToDos</h2>
 
         <div className="ToDos">
+        {todos.length === 0 && <div className='m-5'>No ToDos To Display</div>}
           {todos.map(item=>{
-             return <div key={item.id} className="ToDo flex w-1/2 my-3.5 justify-between">
-              <input onChange={handleCheckbox} type="checkbox" value={item.isCompleted} name={item.id} id="" />
-              <div className={item.iscompleted?"line-through":""}>{item.todo}</div>
+             return (showfinished || !item.isCompleted) && <div key={item.id} className="ToDo flex w-1/2 my-3.5 justify-between">
+              <div className='flex'>
+              <input onChange={handleCheckbox} type="checkbox" checked={item.isCompleted} name={item.id} id="" />
+              <div className={item.isCompleted?"line-through":""}>{item.todo}</div>
+              </div>
               <div className="buttons">
-                <button onClick={handleEdit} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Edit</button>
+                <button onClick={(e)=>handleEdit(e, item.id)} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Edit</button>
                 <button onClick={(e)=>{handleDelete(e, item.id)}} className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold mx-1 rounded-md text-white cursor-pointer'>Delete</button>
               </div>
             </div>
