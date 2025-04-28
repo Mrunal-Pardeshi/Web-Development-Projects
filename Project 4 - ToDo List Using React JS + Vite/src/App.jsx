@@ -74,7 +74,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <div className="container mx-auto p-5 my-5 rounded-xl bg-violet-300 min-h-[85vh] md:w-1/2 w-full">
-        <h1 className='font-bold text-center text-3xl'>MyTask - Manage all your ToDos at one place</h1>
+        <h1 className='font-bold text-center text-3xl mb-5'>MyTask - Manage all your ToDos at one place</h1>
         <div className="addToDo flex flex-col gap-5 my-5">
           <h2 className='text-2xl font-bold'>Add ToDo</h2>
           <div className="flex">
