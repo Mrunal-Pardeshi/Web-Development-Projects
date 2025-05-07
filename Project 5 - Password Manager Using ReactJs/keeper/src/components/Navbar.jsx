@@ -2,8 +2,12 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className='bg-[#7877c64d] flex justify-between py-2 px-2 h-12 text-black items-center'>
-        <div className="logo font-bold text-2xl">KEEPER</div>
+    <nav className='bg-[#7877c64d] flex justify-between py-4 px-5  text-white items-center'>
+        <div className="logo font-bold text-2xl">
+          <span className='text-green-500'>&lt;</span>
+          <span>KEEPER</span>
+          <span className='text-green-500'>/&gt;</span>
+          </div>
         <ul className=''>
             <li className='gap-5 flex'>
                 <a className='hover:font-bold' href="/">Home</a>
