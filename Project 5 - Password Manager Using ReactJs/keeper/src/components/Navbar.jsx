@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className='bg-[#7877c64d] flex justify-around py-2 h-12 text-white items-center'>
+    <nav className='bg-[#7877c64d] flex justify-between py-2 px-2 h-12 text-black items-center'>
         <div className="logo font-bold text-2xl">KEEPER</div>
         <ul className=''>
             <li className='gap-5 flex'>
