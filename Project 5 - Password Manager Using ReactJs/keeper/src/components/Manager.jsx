@@ -61,7 +61,7 @@ const Manager = () => {
                             </span>
                         </div>
                     </div>
-                    <button onClick={savePassword} className='flex justify-center items-center bg-green-400 rounded-full gap-2.5 px-8 py-1 hover:bg-green-500 cursor-pointer w-fit'>
+                    <button onClick={savePassword} className='flex justify-center items-center bg-green-600 rounded-full gap-2.5 px-8 py-1 hover:bg-green-800 cursor-pointer w-fit'>
                         <lord-icon src="https://cdn.lordicon.com/efxgwrkc.json" trigger="hover"></lord-icon>
                         Add Password
                     </button>
