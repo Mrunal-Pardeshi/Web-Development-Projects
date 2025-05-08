@@ -3,18 +3,18 @@ import { useRef, useState, useEffect } from 'react'
 
 const Manager = () => {
     const ref = useRef();
-    const [form, setform] = useState({site: "", username: "", password: ""})
+    const [form, setform] = useState({ site: "", username: "", password: "" })
     const [passwordArray, setPasswordArray] = useState([])
 
     useEffect(() => {
         let passwords = localStorage.getItem("passwords");
         let passwordArray;
-        if(passwords){
-          setPasswordArray(JSON.parse(passwords))
+        if (passwords) {
+            setPasswordArray(JSON.parse(passwords))
         }
-     
+
     }, [])
-    
+
 
     const showPassword = () => {
         alert("Show the Password")
@@ -27,17 +27,17 @@ const Manager = () => {
     }
 
     const savePassword = () => {
-      setPasswordArray([...passwordArray, form])
-      localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]))
-      console.log([...passwordArray, form])
+        setPasswordArray([...passwordArray, form])
+        localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]))
+        console.log([...passwordArray, form])
 
     }
 
     const handleChange = (e) => {
-      setform({...form, [e.target.name] : e.target.value })
+        setform({ ...form, [e.target.name]: e.target.value })
     }
-    
-    
+
+
 
     return (
         <>
@@ -65,6 +65,30 @@ const Manager = () => {
                         <lord-icon src="https://cdn.lordicon.com/efxgwrkc.json" trigger="hover"></lord-icon>
                         Add Password
                     </button>
+                </div>
+                <div className="passwords">
+                    <h2 className='text-white font-bold text-2xl py-3'>Your Passwords</h2>
+                    {passwordArray.length === 0 && <div className='text-white'>No Passwords To Show</div>}
+                    {passwordArray.length != 0 && 
+                    <table class="table-auto w-full text-white overflow-hidden rounded-lg">
+                        <thead className='bg-green-600'>
+                            <tr>
+                                <th className='py-2'>Site</th>
+                                <th className='py-2'>Username</th>
+                                <th className='py-2'>Password</th>
+                            </tr>
+                        </thead>
+                        <tbody className='bg-black'>
+                            {passwordArray.map((item, index) =>{
+                                return <tr key={index}>
+                                <td className='py-2 border-y-1 border-black text-center w-32'><a href={item.site} target = '_blank'>{item.site}</a></td>
+                                <td className='py-2 border-y-1 border-black text-center w-32'>{item.username}</td>
+                                <td className='py-2 border-y-1 border-black text-center w-32'>{item.password}</td>
+                            </tr>
+                            })}
+                           
+                        </tbody>
+                    </table>}
                 </div>
             </div>
         </>
