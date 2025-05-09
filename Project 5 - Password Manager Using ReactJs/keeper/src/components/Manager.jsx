@@ -71,26 +71,46 @@ const Manager = () => {
                 <div className="passwords">
                     <h2 className='text-white font-bold text-2xl py-3'>Your Passwords</h2>
                     {passwordArray.length === 0 && <div className='text-white'>No Passwords To Show</div>}
-                    {passwordArray.length != 0 && 
-                    <table class="table-auto w-full text-white overflow-hidden rounded-lg">
-                        <thead className='bg-green-600'>
-                            <tr>
-                                <th className='py-2'>Site</th>
-                                <th className='py-2'>Username</th>
-                                <th className='py-2'>Password</th>
-                            </tr>
-                        </thead>
-                        <tbody className='bg-black'>
-                            {passwordArray.map((item, index) =>{
-                                return <tr key={index}>
-                                <td className='py-2 border-y-1 border-black text-center w-32'><a href={item.site} target = '_blank'>{item.site}</a></td>
-                                <td className='py-2 border-y-1 border-black text-center w-32'>{item.username}</td>
-                                <td className='py-2 border-y-1 border-black text-center w-32'>{item.password}</td>
-                            </tr>
-                            })}
-                           
-                        </tbody>
-                    </table>}
+                    {passwordArray.length != 0 &&
+                        <table class="table-auto w-full text-white overflow-hidden rounded-lg">
+                            <thead className='bg-green-600'>
+                                <tr>
+                                    <th className='py-2'>Site</th>
+                                    <th className='py-2'>Username</th>
+                                    <th className='py-2'>Password</th>
+                                </tr>
+                            </thead>
+                            <tbody className='bg-black'>
+                                {passwordArray.map((item, index) => {
+                                    return <tr key={index}>
+                                        <td className='py-2 border-y-1 border-black text-center w-32 flex justify-center items-center'><a href={item.site} target='_blank'>{item.site}</a>
+                                        <div className='cursor-pointer'>
+                                            <lord-icon
+                                                style={{ "width": "25px", "height": "25px", "paddingTop": "3px", "paddingLeft": "3px", "color" : "white" }}
+                                                src="https://cdn.lordicon.com/iykgtsbt.json"
+                                                trigger="hover" >
+                                            </lord-icon>
+                                         </div>
+                                        </td>
+                                        <td className='py-2 border-y-1 border-black text-center w-32 '>{item.username}
+                                        <lord-icon
+                                                style={{ "width": "25px", "height": "25px", "paddingTop": "3px", "paddingLeft": "3px", "color" : "white" }}
+                                                src="https://cdn.lordicon.com/iykgtsbt.json"
+                                                trigger="hover" >
+                                            </lord-icon>
+                                        </td>
+                                        <td className='py-2 border-y-1 border-black text-center w-32 '>{item.password}
+                                        <lord-icon
+                                                style={{ "width": "25px", "height": "25px", "paddingTop": "3px", "paddingLeft": "3px", "color" : "white" }}
+                                                src="https://cdn.lordicon.com/iykgtsbt.json"
+                                                trigger="hover" >
+                                            </lord-icon>
+                                        </td>
+                                    </tr>
+                                })}
+
+                            </tbody>
+                        </table>}
                 </div>
             </div>
         </>
