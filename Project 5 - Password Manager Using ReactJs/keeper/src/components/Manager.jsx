@@ -83,18 +83,38 @@ const Manager = () => {
                             <tbody className='bg-black'>
                                 {passwordArray.map((item, index) => {
                                     return <tr key={index}>
-                                        <td className='py-2 border-y-1 border-black text-center flex justify-center items-center'><a href={item.site} target='_blank'>{item.site}</a>
-                                        <div className='size-7 cursor-pointer'>
-                                            <lord-icon
-                                                style={{"width": "25px", "height": "25px", "padding-top": "3px"}}
-                                                src="https://cdn.lordicon.com/iykgtsbt.json"
-                                                trigger="hover" >
-                                            </lord-icon>
-                                         </div>
+                                        <td className='py-2 border-y-1 border-black text-center'>
+                                            <div className='flex justify-center items-center'><a href={item.site} target='_blank'>{item.site}</a>
+                                                <div className='size-7 cursor-pointer'>
+                                                    <lord-icon
+                                                        style={{ "width": "25px", "height": "25px", "padding-top": "4px", "padding-left": "5px" }}
+                                                        src="https://cdn.lordicon.com/iykgtsbt.json"
+                                                        trigger="hover" >
+                                                    </lord-icon>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td className='py-2 border-y-1 border-black text-center w-32 '>{item.username}
+                                        <td className='py-2 border-y-1 border-black text-center  '><div className='flex justify-center items-center'>{item.username}
+                                            <div className='size-7 cursor-pointer'>
+                                                <lord-icon
+                                                    style={{ "width": "25px", "height": "25px", "padding-top": "4px", "padding-left": "5px" }}
+                                                    src="https://cdn.lordicon.com/iykgtsbt.json"
+                                                    trigger="hover" >
+                                                </lord-icon>
+                                            </div>
+                                        </div>
                                         </td>
-                                        <td className='py-2 border-y-1 border-black text-center w-32 '>{item.password}
+                                        <td className='py-2 border-y-1 border-black text-center  '>
+                                            <div className='flex justify-center items-center'>
+                                                {item.password}
+                                                <div className='size-7 cursor-pointer'>
+                                                    <lord-icon
+                                                        style={{ "width": "25px", "height": "25px", "padding-top": "4px", "padding-left": "5px" }}
+                                                        src="https://cdn.lordicon.com/iykgtsbt.json"
+                                                        trigger="hover" >
+                                                    </lord-icon>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 })}
