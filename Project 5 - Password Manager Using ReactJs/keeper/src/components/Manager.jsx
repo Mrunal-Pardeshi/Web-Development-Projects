@@ -39,6 +39,12 @@ const Manager = () => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
 
+    const copyText = (text) => {
+        alert("Copued to clipboard " + text)
+        navigator.clipboard.writeText(text)
+    }
+    
+
 
 
     return (
@@ -85,9 +91,9 @@ const Manager = () => {
                                     return <tr key={index}>
                                         <td className='py-2 border-y-1 border-black text-center'>
                                             <div className='flex justify-center items-center'><a href={item.site} target='_blank'>{item.site}</a>
-                                                <div className='size-7 cursor-pointer'>
+                                                <div className='lordIconCopy size-7 cursor-pointer' onClick={()=>{ copyText(item.site)}}>
                                                     <lord-icon
-                                                        style={{ "width": "25px", "height": "25px", "padding-top": "4px", "padding-left": "5px" }}
+                                                        style={{ "width": "25px", "height": "25px", "paddingTop": "4px", "paddingLeft": "5px" }}
                                                         src="https://cdn.lordicon.com/iykgtsbt.json"
                                                         trigger="hover" >
                                                     </lord-icon>
@@ -95,9 +101,9 @@ const Manager = () => {
                                             </div>
                                         </td>
                                         <td className='py-2 border-y-1 border-black text-center  '><div className='flex justify-center items-center'>{item.username}
-                                            <div className='size-7 cursor-pointer'>
+                                            <div className='lordIconCopy size-7 cursor-pointer' onClick={()=>{ copyText(item.username)}}>
                                                 <lord-icon
-                                                    style={{ "width": "25px", "height": "25px", "padding-top": "4px", "padding-left": "5px" }}
+                                                    style={{ "width": "25px", "height": "25px", "paddingTop": "4px", "paddingLeft": "5px" }}
                                                     src="https://cdn.lordicon.com/iykgtsbt.json"
                                                     trigger="hover" >
                                                 </lord-icon>
@@ -107,9 +113,9 @@ const Manager = () => {
                                         <td className='py-2 border-y-1 border-black text-center  '>
                                             <div className='flex justify-center items-center'>
                                                 {item.password}
-                                                <div className='size-7 cursor-pointer'>
+                                                <div className='lordIconCopy size-7 cursor-pointer' onClick={()=>{ copyText(item.password)}}>
                                                     <lord-icon
-                                                        style={{ "width": "25px", "height": "25px", "padding-top": "4px", "padding-left": "5px" }}
+                                                        style={{ "width": "25px", "height": "25px", "paddingTop": "4px", "paddingLeft": "5px" }}
                                                         src="https://cdn.lordicon.com/iykgtsbt.json"
                                                         trigger="hover" >
                                                     </lord-icon>
@@ -120,7 +126,8 @@ const Manager = () => {
                                 })}
 
                             </tbody>
-                        </table>}
+                        </table>
+                        }
                 </div>
             </div>
         </>
