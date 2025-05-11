@@ -1,5 +1,7 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 const Manager = () => {
     const ref = useRef();
@@ -29,8 +31,15 @@ const Manager = () => {
     }
 
     const savePassword = () => {
-        setPasswordArray([...passwordArray, form])
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]))
+        setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
+        localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
+        console.log([...passwordArray, form])
+
+    }
+
+    const deletePassword = () => {
+        setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
+        localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
         console.log([...passwordArray, form])
 
     }
@@ -40,15 +49,40 @@ const Manager = () => {
     }
 
     const copyText = (text) => {
-        alert("Copued to clipboard " + text)
+        toast('Copied to clipboard!', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: "Bounce",
+        });
+
         navigator.clipboard.writeText(text)
     }
-    
+
 
 
 
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover={false}
+                theme="dark"
+                transition="Bounce"
+            />
+
             <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 
             <div className=" mx-auto max-w-5xl p-5">
@@ -69,21 +103,22 @@ const Manager = () => {
                             </span>
                         </div>
                     </div>
-                    <button onClick={savePassword} className='flex justify-center items-center bg-green-600 rounded-full gap-2.5 px-8 py-1 hover:bg-green-800 cursor-pointer w-fit'>
+                    <button onClick={savePassword} className='flex justify-center items-center bg-green-600 rounded-full gap-2.5 px-5 py-1 hover:bg-green-800 cursor-pointer w-fit'>
                         <lord-icon src="https://cdn.lordicon.com/efxgwrkc.json" trigger="hover"></lord-icon>
-                        Add Password
+                        Save Password
                     </button>
                 </div>
                 <div className="passwords">
                     <h2 className='text-white font-bold text-2xl py-3'>Your Passwords</h2>
                     {passwordArray.length === 0 && <div className='text-white'>No Passwords To Show</div>}
                     {passwordArray.length != 0 &&
-                        <table class="table-auto w-full text-white overflow-hidden rounded-lg">
+                        <table className="table-auto w-full text-white overflow-hidden rounded-lg">
                             <thead className='bg-green-600'>
                                 <tr>
                                     <th className='py-2'>Site</th>
                                     <th className='py-2'>Username</th>
                                     <th className='py-2'>Password</th>
+                                    <th className='py-2'>Actions</th>
                                 </tr>
                             </thead>
                             <tbody className='bg-black'>
@@ -91,21 +126,23 @@ const Manager = () => {
                                     return <tr key={index}>
                                         <td className='py-2 border-y-1 border-black text-center'>
                                             <div className='flex justify-center items-center'><a href={item.site} target='_blank'>{item.site}</a>
-                                                <div className='lordIconCopy size-7 cursor-pointer' onClick={()=>{ copyText(item.site)}}>
+                                                <div className='lordIconCopy size-7 cursor-pointer' onClick={() => { copyText(item.site) }}>
                                                     <lord-icon
                                                         style={{ "width": "25px", "height": "25px", "paddingTop": "4px", "paddingLeft": "5px" }}
                                                         src="https://cdn.lordicon.com/iykgtsbt.json"
-                                                        trigger="hover" >
+                                                        trigger="hover"
+                                                        colors="primary:#ffffff">
                                                     </lord-icon>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className='py-2 border-y-1 border-black text-center  '><div className='flex justify-center items-center'>{item.username}
-                                            <div className='lordIconCopy size-7 cursor-pointer' onClick={()=>{ copyText(item.username)}}>
+                                            <div className='lordIconCopy size-7 cursor-pointer' onClick={() => { copyText(item.username) }}>
                                                 <lord-icon
                                                     style={{ "width": "25px", "height": "25px", "paddingTop": "4px", "paddingLeft": "5px" }}
                                                     src="https://cdn.lordicon.com/iykgtsbt.json"
-                                                    trigger="hover" >
+                                                    trigger="hover"
+                                                    colors="primary:#ffffff" >
                                                 </lord-icon>
                                             </div>
                                         </div>
@@ -113,21 +150,41 @@ const Manager = () => {
                                         <td className='py-2 border-y-1 border-black text-center  '>
                                             <div className='flex justify-center items-center'>
                                                 {item.password}
-                                                <div className='lordIconCopy size-7 cursor-pointer' onClick={()=>{ copyText(item.password)}}>
+                                                <div className='lordIconCopy size-7 cursor-pointer' onClick={() => { copyText(item.password) }}>
                                                     <lord-icon
                                                         style={{ "width": "25px", "height": "25px", "paddingTop": "4px", "paddingLeft": "5px" }}
                                                         src="https://cdn.lordicon.com/iykgtsbt.json"
-                                                        trigger="hover" >
+                                                        trigger="hover"
+                                                        colors="primary:#ffffff" >
                                                     </lord-icon>
                                                 </div>
                                             </div>
                                         </td>
+                                        <td className='py-2 border-y-1 border-black text-center  '>
+                                            <span className='cursor-pointer mx-1'>
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/gwlusjdu.json"
+                                                    trigger="hover"
+                                                    colors="primary:#ffffff"
+                                                    style={{ "width": "25px", "height": "25px" }}>
+                                                </lord-icon>
+                                            </span>
+                                            <span className='cursor-pointer mx-1'>
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/xyfswyxf.json"
+                                                    trigger="hover"
+                                                    colors="primary:#ffffff"
+                                                    style={{ "width": "25px", "height": "25px" }}>
+                                                </lord-icon>
+                                            </span>
+                                        </td>
                                     </tr>
-                                })}
+                                })
+                                }
 
                             </tbody>
                         </table>
-                        }
+                    }
                 </div>
             </div>
         </>
