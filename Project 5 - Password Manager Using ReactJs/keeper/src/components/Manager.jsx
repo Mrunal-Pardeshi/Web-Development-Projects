@@ -37,10 +37,11 @@ const Manager = () => {
 
     }
 
-    const deletePassword = () => {
-        setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
-        console.log([...passwordArray, form])
+    const deletePassword = (id) => {
+        console.log("Deleting password with id ", id)
+        // setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
+        // localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
+        // console.log([...passwordArray, form])
 
     }
 
@@ -49,7 +50,7 @@ const Manager = () => {
     }
 
     const copyText = (text) => {
-        toast('Copied to clipboard!', {
+        toast.success('Copied to clipboard!', {
             position: "top-center",
             autoClose: 1000,
             hideProgressBar: false,
@@ -58,7 +59,7 @@ const Manager = () => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-            transition: "Bounce",
+            transition: "Slide",
         });
 
         navigator.clipboard.writeText(text)
@@ -76,11 +77,11 @@ const Manager = () => {
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
-                pauseOnFocusLoss={false}
+                pauseOnFocusLoss
                 draggable
                 pauseOnHover={false}
                 theme="dark"
-                transition="Bounce"
+                transition="Slide"
             />
 
             <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
