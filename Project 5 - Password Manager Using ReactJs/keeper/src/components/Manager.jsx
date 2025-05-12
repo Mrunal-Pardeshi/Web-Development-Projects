@@ -31,11 +31,15 @@ const Manager = () => {
     }
 
     const savePassword = () => {
-        setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
-        console.log([...passwordArray, form])
-        setform({ site: "", username: "", password: "" })
-
+        if(form.site.length > 3 && form.username.length > 3 && form.password.length > 3 ){
+            setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
+            localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
+            console.log([...passwordArray, form])
+            setform({ site: "", username: "", password: "" })
+        }
+        else{
+            toast("Password Not Saved !")
+        }
     }
 
     const deletePassword = (id) => {
@@ -92,9 +96,9 @@ const Manager = () => {
                 transition="Slide"
             />
 
-            <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+          
 
-            <div className=" mx-auto max-w-5xl p-5">
+            <div className=" md:mx-auto md:max-w-5xl min-h-[82.8vh] h-full md:p-5">
                 <h1 className='text-center text-white font-bold text-4xl'>
                     <span className='text-green-500'>&lt;</span>
                     <span>KEEPER</span>
@@ -103,7 +107,7 @@ const Manager = () => {
                 <p className='text-white text-center text-lg'>Your own Password Keeper</p>
                 <div className="text-white flex flex-col items-center p-4 gap-5">
                     <input value={form.site} onChange={handleChange} placeholder='Enter Website URL' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="text" name="site" id="" />
-                    <div className="flex w-full justify-around gap-8">
+                    <div className="flex flex-col md:flex-row w-full justify-around gap-8">
                         <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="text" name="username" id="" />
                         <div className="relative">
                             <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter Password' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="password" name="password" id="" />
