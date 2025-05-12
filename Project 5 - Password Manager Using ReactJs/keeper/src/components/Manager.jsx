@@ -34,22 +34,23 @@ const Manager = () => {
         setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
         localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
         console.log([...passwordArray, form])
+        setform({ site: "", username: "", password: "" })
 
     }
 
     const deletePassword = (id) => {
         console.log("Deleting password with id ", id)
         let confirmation = confirm("Do you really want to delete this password??")
-        if(confirmation){
-            setPasswordArray(passwordArray.filter(item=>item.id!==id))
-            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+        if (confirmation) {
+            setPasswordArray(passwordArray.filter(item => item.id !== id))
+            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
         }
     }
 
     const editPassword = (id) => {
         console.log("Editing password with id ", id)
-        setform(passwordArray.filter(item=>item.id===id)[0])
-        setPasswordArray(passwordArray.filter(item=>item.id!==id))
+        setform(passwordArray.filter(item => item.id === id)[0])
+        setPasswordArray(passwordArray.filter(item => item.id !== id))
     }
 
     const handleChange = (e) => {
@@ -57,9 +58,9 @@ const Manager = () => {
     }
 
     const copyText = (text) => {
-        toast.success('Copied to clipboard!', {
+        toast.success('Copied to clipbard!', {
             position: "top-center",
-            autoClose: 1000,
+            autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -79,7 +80,7 @@ const Manager = () => {
         <>
             <ToastContainer
                 position="top-center"
-                autoClose={1000}
+                autoClose={1500}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -169,7 +170,7 @@ const Manager = () => {
                                             </div>
                                         </td>
                                         <td className='py-2 border-y-1 border-black text-center  '>
-                                            <span className='cursor-pointer mx-1' onClick={() => {editPassword(item.id)}}>
+                                            <span className='cursor-pointer mx-1' onClick={() => { editPassword(item.id) }}>
                                                 <lord-icon
                                                     src="https://cdn.lordicon.com/gwlusjdu.json"
                                                     trigger="hover"
@@ -177,7 +178,7 @@ const Manager = () => {
                                                     style={{ "width": "25px", "height": "25px" }}>
                                                 </lord-icon>
                                             </span>
-                                            <span className='cursor-pointer mx-1' onClick={() => {deletePassword(item.id)}}>
+                                            <span className='cursor-pointer mx-1' onClick={() => { deletePassword(item.id) }}>
                                                 <lord-icon
                                                     src="https://cdn.lordicon.com/xyfswyxf.json"
                                                     trigger="hover"
