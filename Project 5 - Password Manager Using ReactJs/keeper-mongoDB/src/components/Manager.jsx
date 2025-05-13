@@ -9,15 +9,20 @@ const Manager = () => {
     const [form, setform] = useState({ site: "", username: "", password: "" })
     const [passwordArray, setPasswordArray] = useState([])
 
+
     useEffect(() => {
-        let passwords = localStorage.getItem("passwords");
-        let passwordArray;
-        if (passwords) {
-            setPasswordArray(JSON.parse(passwords))
-        }
+        getPasswords()
+
 
     }, [])
 
+    const getPasswords = async () => {
+        let req = await fetch("http://localhost:3000/")
+        let passwords = await req.json()
+        console.log(passwords)
+        setPasswordArray(passwords)
+
+    }
 
     const showPassword = () => {
         if (ref.current.src.includes("icons/eyecross.png")) {
@@ -30,37 +35,60 @@ const Manager = () => {
         }
     }
 
-    const savePassword = () => {
-        if(form.site.length > 3 && form.username.length > 3 && form.password.length > 3 ){
+    const savePassword = async () => {
+        if (form.site.length > 3 && form.username.length > 3 && form.password.length > 3) {
+
+            // if any such id exists, then delete it
+            await fetch("http://localhost:3000/", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id: form.id })
+            })
+
             setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
-            localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
-            console.log([...passwordArray, form])
+            await fetch("http://localhost:3000/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ...form, id: uuidv4() })
+            })
+
             setform({ site: "", username: "", password: "" })
-               toast.success('Password saved!', {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: "Slide",
-        });
+            toast.success('Password saved!', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: "Slide",
+            });
         }
-        else{
+        else {
             toast("Password not saved!")
         }
     }
 
-    const deletePassword = (id) => {
+    const deletePassword = async (id) => {
         console.log("Deleting password with id ", id)
         let confirmation = confirm("Do you really want to delete this password??")
         if (confirmation) {
             setPasswordArray(passwordArray.filter(item => item.id !== id))
-            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
+            // localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
+            let res = await fetch("http://localhost:3000/", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id })
+            })
         }
-           toast.success('Password deleted!', {
+        toast.success('Password deleted!', {
             position: "top-center",
             autoClose: 1500,
             hideProgressBar: false,
@@ -75,7 +103,7 @@ const Manager = () => {
 
     const editPassword = (id) => {
         console.log("Editing password with id ", id)
-        setform(passwordArray.filter(item => item.id === id)[0])
+        setform({ ...passwordArray.filter(item => item.id === id)[0], id: id })
         setPasswordArray(passwordArray.filter(item => item.id !== id))
     }
 
@@ -84,7 +112,7 @@ const Manager = () => {
     }
 
     const copyText = (text) => {
-        toast.success('Copied to clipbard!', {
+        toast.success('Copied to clipboard!', {
             position: "top-center",
             autoClose: 1500,
             hideProgressBar: false,
@@ -95,7 +123,7 @@ const Manager = () => {
             theme: "dark",
             transition: "Slide",
         });
-
+       
         navigator.clipboard.writeText(text)
     }
 
@@ -118,7 +146,7 @@ const Manager = () => {
                 transition="Slide"
             />
 
-          <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+            <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 
             <div className=" md:mx-auto md:max-w-5xl min-h-[82.8vh]  md:p-5">
                 <h1 className='text-center text-white font-bold text-4xl'>
@@ -128,11 +156,11 @@ const Manager = () => {
                 </h1>
                 <p className='text-white text-center text-lg'>Your own Password Keeper</p>
                 <div className="text-white flex flex-col items-center p-4 gap-5">
-                    <input value={form.site} onChange={handleChange} placeholder='Enter Website URL' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="text" name="site" id="" />
+                    <input value={form.site} onChange={handleChange} placeholder='Enter Website URL' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="text" name="site" id="site" />
                     <div className="flex flex-col md:flex-row w-full justify-around gap-8">
-                        <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="text" name="username" id="" />
+                        <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="text" name="username" id="username" />
                         <div className="relative">
-                            <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter Password' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="password" name="password" id="" />
+                            <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter Password' className='bg-white rounded-full text-black font-bold border border-green-500 w-full p-4 py-2' type="password" name="password" id="password" />
                             <span className='absolute right-[10px] top-[10px] cursor-pointer' onClick={showPassword}>
                                 <img ref={ref} className='' width={23} src="icons/eye.png" alt="eye" />
                             </span>
