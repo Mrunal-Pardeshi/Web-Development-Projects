@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Navbar = () => {
   return (
     <nav className='bg-gray-950 text-white flex justify-between px-4 h-15 items-center'>
-            <div className="logo font-bold text-lg flex items-center justify-center gap-2">
+            <div className="logo font-bold text-lg flex items-center justify-center gap-1">
               <img src="/tea.gif" width={40} alt="" />
               <span>GetMeAChai</span>
             </div>

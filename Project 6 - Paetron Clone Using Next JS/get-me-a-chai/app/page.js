@@ -21,7 +21,7 @@ export default function Home() {
       </div>
 
       <div className="text-white container mx-auto pb-32 pt-14">
-        <h1 className="text-3xl font-bold text-center mb-14">Your Fans can buy you a chai</h1>
+        <h2 className="text-3xl font-bold text-center mb-14">Your Fans can buy you a chai</h2>
         <div className="flex gap-5 justify-around">
           <div className="item space-y-3 flex flex-col items-center justify-center">
             <img className=" bg-slate-500 rounded-full p-3 text-black" src="/man.gif" width={88} alt="" />
@@ -45,7 +45,7 @@ export default function Home() {
       </div>
 
       <div className="text-white container mx-auto pb-32 pt-14 flex flex-col justify-center items-center">
-        <h1 className="text-3xl font-bold text-center mb-14">Learn more about us</h1>
+        <h2 className="text-3xl font-bold text-center mb-14">Learn more about us</h2>
         
         <iframe width="560" height="315" src="https://www.youtube.com/embed/GrBg40ty0dk?si=bnxTw6gVH0ABAfD9" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
         
