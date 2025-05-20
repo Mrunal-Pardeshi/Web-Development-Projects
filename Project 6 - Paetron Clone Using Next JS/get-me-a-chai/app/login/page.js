@@ -1,9 +1,11 @@
+"use client"
 import React from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const Login = () => {
     return (
         <div className='text-white py-12 container mx-auto'>
-            <h1 className='font-bold text-3xl text-center'>Login/Signup to get your fans to support you</h1>
+            <h1 className='font-bold text-3xl text-center'>Login to get your fans to support you</h1>
 
 
 
@@ -15,7 +17,7 @@ const Login = () => {
                     <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                         viewBox="-0.5 0 48 48" version="1.1">
 
-                        <g id="Icons" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
+                        <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                             <g id="Color-" transform="translate(-401.000000, -860.000000)">
                                 <g id="Google" transform="translate(401.000000, 860.000000)">
                                     <path
