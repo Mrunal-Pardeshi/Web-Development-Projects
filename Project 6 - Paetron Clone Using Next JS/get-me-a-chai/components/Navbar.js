@@ -9,10 +9,12 @@ const Navbar = () => {
 
   return (
     <nav className='bg-gray-950 text-white flex justify-between px-4 h-15 items-center'>
-      <div className="logo font-bold text-lg flex items-center justify-center gap-1">
+     
+        <Link href={"/"} className="logo font-bold text-lg flex items-center justify-center gap-1">
         <img src="/tea.gif" width={40} alt="" />
         <span>GetMeAChai</span>
-      </div>
+        </Link>
+      
       {/* <ul className='flex justify-between gap-5'>
             <li>Home</li>
             <li>About</li>
@@ -34,10 +36,7 @@ const Navbar = () => {
                 <Link href="/dashboard" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
               </li>
               <li>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</Link>
-              </li>
-              <li>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</Link>
+                <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Your Page</Link>
               </li>
               <li>
                 <Link href="#" onClick={()=>{signOut()}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</Link>
